@@ -1,0 +1,13 @@
+langchain_community
+langchain
+numpy
+pandas
+matplotlib
+seaborn
+pydantic
+langchain_google_genai
+langchain_core
+typing_extensions
+langchain_groq
+streamlit
+python-dotenv
