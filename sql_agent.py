@@ -293,7 +293,7 @@ agent = create_sql_agent(llm, toolkit, prefix=prompt,extra_tools=[visualize_tool
 #query = 'i need proportion of top 10 companies of laptop in pie chart?'
 query = st.text_input(label='Enter your query here:')
 
-if st.button("PROCEED") and query and uploaded_file:
+if st.button("PROCEED") and query and uploaded_file and GEMINI_API_KEY:
    img_path = '/mount/src/DOXPLORE/plots'
    os.makedirs(img_path, exist_ok=True)  # Ensure the plots directory exists
    image_filename = f"{img_path}/plot.jpeg"
