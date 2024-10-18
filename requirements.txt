@@ -11,3 +11,4 @@ typing_extensions
 langchain_groq
 streamlit
 python-dotenv
+lxml
