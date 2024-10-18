@@ -65,8 +65,15 @@ def read_sql_query(sql,conn):
 
 
 #OPENAI_API_KEY=userdata.get('OPENAI_API_KEY')
-GEMINI_API_KEY= os.getenv('GEMINI_API_KEY')
+#GEMINI_API_KEY= os.getenv('GEMINI_API_KEY')
 GROQ_API_KEY=os.getenv('GROQ_API_KEY')
+
+st.set_page_config(layout="wide")
+st.title("DOXPLOR")
+#################################APIKeY################################################
+with st.sidebar:
+    GEMINI_API_KEY = st.text_input("GEMINI API KEY", key="chatbot_api_key", type="password")
+#################################APIKEY################################################
 
 
 #from langchain.sql_database import SQLDatabase
