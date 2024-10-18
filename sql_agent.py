@@ -298,7 +298,7 @@ from langchain.agents import AgentType, tool, create_sql_agent
 #query = 'i need proportion of top 10 companies of laptop in pie chart?'
 query = st.text_input(label='Enter your query here:')
 
-if st.button("PROCEED") and query and uploaded_file and GEMINI_API_KEY:
+if st.button("PROCEED") and query and uploaded_file and (GEMINI_API_KEY and GROQ_API_KEY):
    llm = ChatGroq(model='llama-3.1-70b-versatile',api_key=GROQ_API_KEY)
    toolkit = SQLDatabaseToolkit(db=db, llm=llm)
    agent = create_sql_agent(llm, toolkit, prefix=prompt,extra_tools=[visualize_tool],verbose=True,
