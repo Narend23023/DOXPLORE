@@ -244,7 +244,7 @@ visualize_tool = StructuredTool.from_function(
 # print(visualize_tool.args)
 
 
-toolkit = SQLDatabaseToolkit(db=db, llm=llm)
+#toolkit = SQLDatabaseToolkit(db=db, llm=llm)
 
 #print(toolkit.get_tools())
 
@@ -291,14 +291,19 @@ Important Guidelines:
 output_parser = ReActSingleInputOutputParser()
 
 from langchain.agents import AgentType, tool, create_sql_agent
-agent = create_sql_agent(llm, toolkit, prefix=prompt,extra_tools=[visualize_tool],verbose=True,
-    output_parser=output_parser,  # Set the custom output parser
-    handle_parsing_errors=True)
+# agent = create_sql_agent(llm, toolkit, prefix=prompt,extra_tools=[visualize_tool],verbose=True,
+#     output_parser=output_parser,  # Set the custom output parser
+#     handle_parsing_errors=True)
 
 #query = 'i need proportion of top 10 companies of laptop in pie chart?'
 query = st.text_input(label='Enter your query here:')
 
 if st.button("PROCEED") and query and uploaded_file and GEMINI_API_KEY:
+   llm = ChatGroq(model='llama-3.1-70b-versatile',api_key=GROQ_API_KEY)
+   toolkit = SQLDatabaseToolkit(db=db, llm=llm)
+   agent = create_sql_agent(llm, toolkit, prefix=prompt,extra_tools=[visualize_tool],verbose=True,
+   output_parser=output_parser,  # Set the custom output parser
+   handle_parsing_errors=True)
    img_path = '/mount/src/DOXPLORE/plots'
    os.makedirs(img_path, exist_ok=True)  # Ensure the plots directory exists
    image_filename = f"{img_path}/plot.jpeg"
