@@ -92,7 +92,7 @@ db = SQLDatabase.from_uri("sqlite:///input_dataset.sqlite")
 
 
 
-llm=ChatGoogleGenerativeAI(model='gemini-1.5-flash',google_api_key=GEMINI_API_KEY)
+llm=ChatGoogleGenerativeAI(model='gemini-1.5-pro',google_api_key=GEMINI_API_KEY)
 #llm = ChatGroq(model='llama-3.1-70b-versatile',api_key=GROQ_API_KEY)
 
 ##-----------------------------------------------------TOOL-------------------------------------------------------------------##
@@ -134,9 +134,9 @@ def visualize_data(table_schema : str):
   # df = pd.DataFrame(rows, columns=headers)
   # print(df)
   # df_schema = dict(df.dtypes)
-  llm = ChatGoogleGenerativeAI(model='gemini-1.5-flash',google_api_key=GEMINI_API_KEY)
+  llm = ChatGoogleGenerativeAI(model='gemini-1.5-pro',google_api_key=GEMINI_API_KEY)
   #llm = ChatGroq(model='llama-3.1-70b-versatile',api_key=GROQ_API_KEY, temperature=0)
-  image_llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", google_api_key=GEMINI_API_KEY)
+  image_llm = ChatGoogleGenerativeAI(model="gemini-1.5-pro", google_api_key=GEMINI_API_KEY)
   prompt_template = PromptTemplate(
         template="""You are an expert in visualizing data using Matplotlib, Seaborn
         . Your response should consist solely of the visualization command, without any additional text following or before the command.
