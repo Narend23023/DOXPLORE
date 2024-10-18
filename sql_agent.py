@@ -32,12 +32,12 @@ from langchain.agents.output_parsers import ReActSingleInputOutputParser
 import base64
 from langchain.schema import HumanMessage
 import os
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 import time
 import streamlit as st
 import re
 # Load environment variables from the .env file
-load_dotenv()
+#load_dotenv()
 
 # File uploader widget
 uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
@@ -111,7 +111,7 @@ def visualize_data(table_schema : str):
   print(f'Question :{question}')
 
   #image_details
-  img_path = './plots'
+  img_path = '/mount/src/DOXPLORE/plots'
   os.makedirs(img_path, exist_ok=True)  # Ensure the plots directory exists
   image_filename = f"{img_path}/plot.jpeg"
   if os.path.exists(image_filename):
@@ -287,7 +287,7 @@ agent = create_sql_agent(llm, toolkit, prefix=prompt,extra_tools=[visualize_tool
 query = st.text_input(label='Enter your query here:')
 
 if st.button("PROCEED") and query and uploaded_file:
-   img_path = './plots'
+   img_path = '/mount/src/DOXPLORE/plots'
    os.makedirs(img_path, exist_ok=True)  # Ensure the plots directory exists
    image_filename = f"{img_path}/plot.jpeg"
    if os.path.exists(image_filename):
@@ -302,11 +302,11 @@ if st.button("PROCEED") and query and uploaded_file:
    else:
       st.write(response)
       if os.path.exists(image_filename):
-         st.image('./plots/plot.jpeg')
+         st.image('/mount/src/DOXPLORE/plots/plot.jpeg')
       else:
          pass
 else:
-   st.write('Please upload the csv and question')
+   st.write('Please upload the csv, question and click PROCEED button.')
 
 # print('- 2006: Open Price - 28.5, Close Price - 28\n- 2007: Open Price - 27.5, Close Price - 27.5\n- 2008: Open Price - 24, Close Price - 23.5\n- 2009: Open Price - 19, Close Price - 18.5\n- 2010: Open Price - 20, Close Price - 20\n- 2011: Open Price - 22, Close Price - 22\n- 2012: Open Price - 26, Close Price - 26\n- 2013: Open Price - 32, Close Price - 31.5\n- 2014: Open Price - 33, Close Price - 32.5\n- 2015: Open Price - 36.5, Close Price - 36.5\n- 2016: Open Price - 37.5, Close Price - 37.5')
 
