@@ -94,7 +94,8 @@ db = SQLDatabase.from_uri("sqlite:///input_dataset.sqlite")
 
 
 #llm=ChatGoogleGenerativeAI(model='gemini-1.5-pro',google_api_key=GEMINI_API_KEY)
-llm = ChatGroq(model='llama-3.1-70b-versatile',api_key=GROQ_API_KEY)
+if GROQ_API_KEY:
+    llm = ChatGroq(model='llama-3.1-70b-versatile',api_key=GROQ_API_KEY)
 
 ##-----------------------------------------------------TOOL-------------------------------------------------------------------##
 
