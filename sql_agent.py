@@ -309,7 +309,10 @@ if st.button("PROCEED") and query and uploaded_file and (GEMINI_API_KEY and GROQ
    image_filename = f"{img_path}/plot.jpeg"
    if os.path.exists(image_filename):
     os.remove(image_filename)
-   response=agent.invoke({'input': query})
+   try:
+       response=agent.invoke({'input': query})
+   except Exception as e:
+       st.write(f"Error in execution: {e}")
    #st.write(agent.stream({'input': query}))
    output = response['output']
    #print(response)
