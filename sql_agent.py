@@ -317,22 +317,33 @@ if st.button("PROCEED") and query and uploaded_file and (GEMINI_API_KEY and OPEN
    try:
        response=agent.invoke({'input': query})
        output = response['output']
+       if (bool(re.search(r'<table>.*</table>', output, re.DOTALL))):
+           response_df = pd.read_html(output)[0]
+           st.dataframe(response_df)
+       else:
+           st.write(response)
+           if os.path.exists(image_filename):
+               st.image('/mount/src/DOXPLORE/plots/plot.jpeg')
+           else:
+               pass
+       else:
+           st.write('Please upload the csv, question and click PROCEED button.')
    except Exception as e:
        st.write(f"Error in execution: {e}")
    #st.write(agent.stream({'input': query}))
    
    #print(response)
-   if (bool(re.search(r'<table>.*</table>', output, re.DOTALL))):
-      response_df = pd.read_html(output)[0]
-      st.dataframe(response_df)
-   else:
-      st.write(response)
-      if os.path.exists(image_filename):
-         st.image('/mount/src/DOXPLORE/plots/plot.jpeg')
-      else:
-         pass
-else:
-   st.write('Please upload the csv, question and click PROCEED button.')
+#    if (bool(re.search(r'<table>.*</table>', output, re.DOTALL))):
+#       response_df = pd.read_html(output)[0]
+#       st.dataframe(response_df)
+#    else:
+#       st.write(response)
+#       if os.path.exists(image_filename):
+#          st.image('/mount/src/DOXPLORE/plots/plot.jpeg')
+#       else:
+#          pass
+# else:
+#    st.write('Please upload the csv, question and click PROCEED button.')
 
 # print('- 2006: Open Price - 28.5, Close Price - 28\n- 2007: Open Price - 27.5, Close Price - 27.5\n- 2008: Open Price - 24, Close Price - 23.5\n- 2009: Open Price - 19, Close Price - 18.5\n- 2010: Open Price - 20, Close Price - 20\n- 2011: Open Price - 22, Close Price - 22\n- 2012: Open Price - 26, Close Price - 26\n- 2013: Open Price - 32, Close Price - 31.5\n- 2014: Open Price - 33, Close Price - 32.5\n- 2015: Open Price - 36.5, Close Price - 36.5\n- 2016: Open Price - 37.5, Close Price - 37.5')
 
