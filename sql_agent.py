@@ -278,6 +278,7 @@ Steps to Follow:
 
 Important Guidelines:
 - Always start by examining the tables in the database to understand what data is available.
+- Table name will always be 'input_dataset'. Hence, dont assume the table is irrelevant to user's question. You always need to check Table schema to give complete answer.
 - Query the schema of the most relevant tables to inform your queries.
 - Provide sql_db_schema as an input to SQLVisualizeTool. 
 - dont utilise SQLVisualizeTool when the user question cant be answered visually. Use the remaining tools to answer the query.
