@@ -316,10 +316,11 @@ if st.button("PROCEED") and query and uploaded_file and (GEMINI_API_KEY and OPEN
     os.remove(image_filename)
    try:
        response=agent.invoke({'input': query})
+       output = response['output']
    except Exception as e:
        st.write(f"Error in execution: {e}")
    #st.write(agent.stream({'input': query}))
-   output = response['output']
+   
    #print(response)
    if (bool(re.search(r'<table>.*</table>', output, re.DOTALL))):
       response_df = pd.read_html(output)[0]
