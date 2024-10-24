@@ -97,8 +97,8 @@ db = SQLDatabase.from_uri("sqlite:///input_dataset.sqlite")
 
 
 #llm=ChatGoogleGenerativeAI(model='gemini-1.5-pro',google_api_key=GEMINI_API_KEY)
-if GROQ_API_KEY:
-    llm = ChatGroq(model='llama-3.1-70b-versatile',api_key=GROQ_API_KEY)
+#if GROQ_API_KEY:
+    #llm = ChatGroq(model='llama-3.1-70b-versatile',api_key=GROQ_API_KEY)
 
 ##-----------------------------------------------------TOOL-------------------------------------------------------------------##
 
@@ -302,7 +302,7 @@ from langchain.agents import AgentType, tool, create_sql_agent
 #query = 'i need proportion of top 10 companies of laptop in pie chart?'
 query = st.text_input(label='Enter your query here:')
 
-if st.button("PROCEED") and query and uploaded_file and (GEMINI_API_KEY and GROQ_API_KEY):
+if st.button("PROCEED") and query and uploaded_file and (GEMINI_API_KEY and OPNEAI_API_KEY):
    #llm = ChatGroq(model='llama-3.1-70b-versatile',api_key=GROQ_API_KEY)
    llm = ChatOpenAI(temperature=0, model="gpt-3.5-turbo-0125",api_key=OPENAI_API_KEY)
    toolkit = SQLDatabaseToolkit(db=db, llm=llm)
