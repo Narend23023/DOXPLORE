@@ -326,10 +326,11 @@ if st.button("PROCEED") and query and uploaded_file and (GEMINI_API_KEY and OPEN
                st.image('/mount/src/DOXPLORE/plots/plot.jpeg')
            else:
                pass
-       else:
-           st.write('Please upload the csv, question and click PROCEED button.')
+       
    except Exception as e:
        st.write(f"Error in execution: {e}")
+else:
+    st.write('Please upload the csv, question and click PROCEED button.')
    #st.write(agent.stream({'input': query}))
    
    #print(response)
