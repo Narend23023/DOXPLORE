@@ -141,7 +141,7 @@ def visualize_data(table_schema : str):
   # df_schema = dict(df.dtypes)
   #llm = ChatGoogleGenerativeAI(model='gemini-1.5-pro',google_api_key=GEMINI_API_KEY)
   #llm = ChatGroq(model='llama-3.1-70b-versatile',api_key=GROQ_API_KEY, temperature=0)
-  llm = ChatOpenAI(temperature=0, model="gpt-3.5-turbo-0125",api_key=OPENAI_API_KEY)
+  llm = ChatOpenAI(temperature=0, model="gpt-3.5-turbo",api_key=OPENAI_API_KEY)
   image_llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", google_api_key=GEMINI_API_KEY)
   prompt_template = PromptTemplate(
         template="""You are an expert in visualizing data using Matplotlib, Seaborn
@@ -304,7 +304,7 @@ query = st.text_input(label='Enter your query here:')
 
 if st.button("PROCEED") and query and uploaded_file and (GEMINI_API_KEY and OPENAI_API_KEY):
    #llm = ChatGroq(model='llama-3.1-70b-versatile',api_key=GROQ_API_KEY)
-   llm = ChatOpenAI(temperature=0, model="gpt-3.5-turbo-0125",api_key=OPENAI_API_KEY)
+   llm = ChatOpenAI(temperature=0, model="gpt-3.5-turbo",api_key=OPENAI_API_KEY)
    toolkit = SQLDatabaseToolkit(db=db, llm=llm)
    agent = create_sql_agent(llm, toolkit, prefix=prompt,extra_tools=[visualize_tool],verbose=True,
    output_parser=output_parser,  # Set the custom output parser
