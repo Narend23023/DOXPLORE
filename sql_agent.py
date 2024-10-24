@@ -27,6 +27,7 @@ import seaborn as sns
 #from langchain.pydantic_v1 import BaseModel, Field
 from langchain.tools import BaseTool, StructuredTool, tool
 from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_openai import ChatOpenAI
 from langchain_core.prompts import PromptTemplate
 from typing import Union, List
 from pydantic import BaseModel, Field
@@ -74,7 +75,9 @@ def read_sql_query(sql,conn):
 #################################APIKeY################################################
 with st.sidebar:
     GEMINI_API_KEY = st.text_input("GEMINI API KEY", key="gemini_api_key", type="password")
-    GROQ_API_KEY = st.text_input("GROQ API KEY", key="llama_api_key", type="password")
+    #GROQ_API_KEY = st.text_input("GROQ API KEY", key="llama_api_key", type="password")
+    OPENAI_API_KEY = st.text_input("OPENAI API KEY", key="openai_api_key", type="password")
+    
 #################################APIKEY################################################
 
 
@@ -137,7 +140,8 @@ def visualize_data(table_schema : str):
   # print(df)
   # df_schema = dict(df.dtypes)
   #llm = ChatGoogleGenerativeAI(model='gemini-1.5-pro',google_api_key=GEMINI_API_KEY)
-  llm = ChatGroq(model='llama-3.1-70b-versatile',api_key=GROQ_API_KEY, temperature=0)
+  #llm = ChatGroq(model='llama-3.1-70b-versatile',api_key=GROQ_API_KEY, temperature=0)
+  llm = ChatOpenAI(temperature=0, model="gpt-3.5-turbo-0125",api_key=OPENAI_API_KEY)
   image_llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", google_api_key=GEMINI_API_KEY)
   prompt_template = PromptTemplate(
         template="""You are an expert in visualizing data using Matplotlib, Seaborn
@@ -299,7 +303,8 @@ from langchain.agents import AgentType, tool, create_sql_agent
 query = st.text_input(label='Enter your query here:')
 
 if st.button("PROCEED") and query and uploaded_file and (GEMINI_API_KEY and GROQ_API_KEY):
-   llm = ChatGroq(model='llama-3.1-70b-versatile',api_key=GROQ_API_KEY)
+   #llm = ChatGroq(model='llama-3.1-70b-versatile',api_key=GROQ_API_KEY)
+   llm = ChatOpenAI(temperature=0, model="gpt-3.5-turbo-0125",api_key=OPENAI_API_KEY)
    toolkit = SQLDatabaseToolkit(db=db, llm=llm)
    agent = create_sql_agent(llm, toolkit, prefix=prompt,extra_tools=[visualize_tool],verbose=True,
    output_parser=output_parser,  # Set the custom output parser
