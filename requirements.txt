@@ -12,3 +12,4 @@ langchain_groq
 streamlit
 python-dotenv
 lxml
+langchain_openai
