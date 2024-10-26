@@ -269,8 +269,7 @@ Steps to Follow:
    - First start by examining the tables in the database to understand what data is available.
    - Query the schema of the most relevant tables to inform your queries.
    - Provide that sql_db_schema(schema with Examples rows of table) along with the input question to the SQLVisualizeTool to create a visualization.
-   - End the chain by responding " Visualization has been provided above".
-
+   
 3. If the Question Cannot Be Visualized:
    - Create a syntactically correct SQLite query to retrieve relevant data.
    - Order the results by a relevant column to present the most interesting examples.
