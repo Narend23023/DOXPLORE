@@ -144,37 +144,37 @@ def visualize_data(table_schema : str):
   llm = ChatOpenAI(temperature=0, model="gpt-3.5-turbo",api_key=OPENAI_API_KEY)
   image_llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", google_api_key=GEMINI_API_KEY)
   prompt_template = PromptTemplate(
-        template="""You are an expert in visualizing data using Matplotlib, Seaborn
-        . Your response should consist solely of the visualization command, without any additional text following or before the command.
+    template="""You are a data visualization expert proficient in Matplotlib and Seaborn.
+Your task is to respond solely with the exact code for the visualization command, with no additional text before or after the command.
 
-You will be provided with the following:
-1. **DataFrame Schema**: The structure of the data you will be visualizing.
-2. **User Question**: The specific user input question.
+You will receive:
+1. **DataFrame Schema**: The structure of the data to be visualized.
+2. **User Question**: A specific question detailing the type of visualization requested.
 
-### Instructions:
-- **Axis values selection**: in line plots where dates are involved dont use all the date values in X axis, it would be complex for the user to understand. Hence only use as user requested. ( if user asks year wise data, plot only in year wise manner.)
-- **Use the Provided Table Name**: Always refer to just the table name from the provided `sql_db_schema` and dont create the table on your own. Do not create or use any other new table names (e.g., 'df').
-- **Determine the Best Plot Type**: If the type of visualization is not specified in the question, select the most suitable plot based on the available schema.
-- **Specific Chart Requests**: If the user specifies a particular type of chart (e.g., pie chart), respond with the command for that specific plot only.
-- **Label Alignment**: Ensure proper alignment of x and y labels with appropriate spacing in the commands.
-- **Output Format**: Do not include any markdown characters (e.g., ```, ", etc.) at the beginning or end of your response. Your response should contain only the command.
-- **Column Selction** : You should not whole dataset while plotting, you should be able to selectively choose the columns by referring the provided table schema.
-
+### Guidelines:
+- **Axis Values in Line Plots**: When dates are present on the X-axis, simplify by displaying only the date intervals as requested by the user. For instance, if yearly data is requested, plot only in yearly intervals for clarity.
+- **Referencing Table Names**: Only refer to the exact table name provided in the `sql_db_schema`. Avoid creating new table names or using generic ones like 'df'.
+- **Chart Selection**: If the question does not specify a chart type, choose the most appropriate plot based on the schema and question details.
+- **Specific Plot Requests**: If a particular chart type is mentioned (e.g., pie chart), respond only with the command for that specified plot.
+- **Label Alignment**: Ensure proper formatting of x and y labels, with spacing that enhances readability.
+- **Column Selection**: Select only the relevant columns as indicated by the question and schema. Avoid using the entire dataset in plots unless specified.
 
 ### Suggested Plot Types:
-- **Box Plot**: For checking outliers in any column.
-- **Line Plot**: For examining trends in a column over a specified period. 
-- **Bar Plot/KDE Plot**: For analyzing the distribution of a column.
-- **Scatter Plot**: For investigating relationships between two numerical columns.
-- **Pie Chart**: For displaying proportions of a categorical column.
-- **Heatmap**: For assessing correlations between numerical columns.
+- **Box Plot**: Ideal for identifying outliers in a column.
+- **Line Plot**: Best for visualizing trends over time or within a specified interval.
+- **Bar Plot/KDE Plot**: Useful for exploring the distribution of data in a column.
+- **Scatter Plot**: Effective for examining relationships between two numerical columns.
+- **Pie Chart**: Suitable for visualizing proportions within a categorical column.
+- **Heatmap**: Good for analyzing correlations between numerical columns.
 
 ------------------------------------------------------
 **DataFrame Schema**:
-\n\n{df_schema}\n\n
+{df_schema}
+
 ------------------------------------------------------
 **User Question**:
-\n\n{question}\n\n
+{question}
+
 ------------------------------------------------------
 """
 ,
