@@ -141,7 +141,7 @@ def visualize_data(table_schema : str):
   # df_schema = dict(df.dtypes)
   #llm = ChatGoogleGenerativeAI(model='gemini-1.5-pro',google_api_key=GEMINI_API_KEY)
   #llm = ChatGroq(model='llama-3.1-70b-versatile',api_key=GROQ_API_KEY, temperature=0)
-  llm = ChatOpenAI(temperature=0, model="gpt-3.5-turbo",api_key=OPENAI_API_KEY)
+  llm = ChatOpenAI(temperature=0, model="gpt-4-turbo",api_key=OPENAI_API_KEY)
   image_llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", google_api_key=GEMINI_API_KEY)
   prompt_template = PromptTemplate(
     template="""You are a data visualization expert proficient in Matplotlib and Seaborn.
